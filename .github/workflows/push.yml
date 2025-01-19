@@ -10,6 +10,6 @@ jobs:
 
     steps:
     - name: step2
-      run: |
+      run:  |
         echo hhhhhh
         echo dhhdhdhdh
