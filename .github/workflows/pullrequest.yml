@@ -1,5 +1,7 @@
 name: pull-workflow
-on: pull_request
+on: 
+  pull_request:
+    types: [opened]
 
 jobs:
   pull-job:
