@@ -1,5 +1,5 @@
 name: checkout-flow
-on: workflow_dispatch
+on: push
 
 jobs:
   no-checkout:
@@ -13,6 +13,3 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v4
-    
-    - name: cat
-      run: cat README.md
