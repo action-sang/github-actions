@@ -8,7 +8,7 @@ jobs:
     - name: echo
       id: check-o
       run: |
-        echo 'test=hello' >> $GITHUB_OUTPUT
+        echo "test=hello" >> $GITHUB_OUTPUT
     - name: check output
       run: |
         echo $ {{ steps.check-o.outputs.test }}
