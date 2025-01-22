@@ -1,0 +1,12 @@
+name: branch-filter
+on:
+  push:
+    paths:
+    - '.github/workflows/part1/*'
+
+jobs:
+  branch-f:
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo
+      run: echo hello
