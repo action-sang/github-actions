@@ -1,0 +1,18 @@
+name: checkout-flow
+on: workflow_dispatch
+
+jobs:
+  no checkout:
+    runs-on: ubuntu-latest
+    step:
+      - name: cat readme fail
+        run: cat README.md
+
+  checkout:
+    runs-on: ubuntu-latest
+    step:
+      - name: checkout
+        uses: actions/checkout@v4
+      
+      - name: cat
+        run: cat README.md
