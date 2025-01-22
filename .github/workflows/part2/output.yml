@@ -5,7 +5,7 @@ jobs:
   create-out:
     runs-on: ubuntu-latest
     outputs:
-      test: "hihi"
+      test: ${{ steps.check-o.outputs.test }}
     steps:
     - name: echo
       id: check-o
