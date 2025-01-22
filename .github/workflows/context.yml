@@ -4,6 +4,6 @@ on: workflow-dispatch
 jobs:
   context:
     runs-on: ubuntu-latest
-      steps:
-      - name: show context
-        run: echo ${{ toJSON(github) }}
+    steps:
+    - name: show context
+      run: echo ${{ toJSON(github) }}
