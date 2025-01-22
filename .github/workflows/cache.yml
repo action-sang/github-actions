@@ -1,8 +1,5 @@
 name: cache
-on:
-  push:
-    paths:
-    - "my-app/**"
+on: push
 
 jobs:
   cache:
