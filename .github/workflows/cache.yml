@@ -25,7 +25,7 @@ jobs:
       run: |
         cd my-app
         npm ci
-    - name: num build
+    - name: npm build
       run: |
         cd my-app
-        num run build
+        npm run build
