@@ -15,6 +15,8 @@ jobs:
     - name: get keyword
       id: get-keyword
       run: |
+        echo level=Undefined >> $GITHUB_OUTPUT
+
         keywords=$(cat keyword-list.txt)
         for keyword in $keywords; do
           if [[ "${{ github.event.issue.title }}" =~ "$keyword" ]]; then
@@ -24,4 +26,24 @@ jobs:
     - name: get output
       run: |
         echo ${{ steps.get-keyword.outputs.level }}
-  
+
+  slack:
+    needs: [get-keyword]
+    if: needs.get-keyword.outputs.level != 'Undefined'
+    runs-on: ubuntu-latest
+    environment: ${{ needs.get-keyword.outputs.level }}  
+
+    steps:
+    - name: slack
+      uses: slackapi/slack-github-action@v2.0.0
+      with:
+        webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+        webhook-type: webhook-trigger
+        payload: |
+          attachments:
+            - text: "issue alert message"
+              color: "28a745"
+              fields:
+                - title: "Level : ${{ needs.get-keyword.outputs.level }}"
+                  short: true
+                  value: "issue url : ${{ github.event.issue.html_url }}"
