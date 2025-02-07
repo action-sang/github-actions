@@ -140,7 +140,6 @@ jobs:
     - name: gh auth login
       run: |
         echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh auth login --with-token 
-      #  envi를 안해서 레포 레벨 시크릿
     - name: create branch
       run: |
         git checkout -b release/${{ github.run_id }}
