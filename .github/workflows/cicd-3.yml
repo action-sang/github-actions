@@ -1,4 +1,4 @@
-name: cicd-2
+name: cicd-3
 on:
   push:
     paths:
