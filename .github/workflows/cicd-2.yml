@@ -38,7 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       environment: ${{ steps.set-env.outputs.environment }}
-
     steps:
     - name: set env
       id: set-env
@@ -47,7 +46,7 @@ jobs:
         echo "environment=dev" >> $GITHUB_OUTPUT
 
         if [[ ${{ github.base_ref }} == "master" ]]; then
-          echo "environment=prod" >> $GITHUB_OUTPUT
+          echo "environment=prod" >> $GITHUB_OUTPUT 
         fi
     - name: check env
       run: echo ${{ steps.set-env.outputs.environment }}
@@ -58,11 +57,10 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    # 요기
     strategy:
       matrix:
         environment: ["${{ needs.set-environment.outputs.environment }}"]
-    environment: ${{ matrix.environment }}    
+    environment: ${{ matrix.environment }}
     steps:
     - name: checkout the code
       uses: actions/checkout@v4
@@ -91,7 +89,7 @@ jobs:
     strategy:
       matrix:
         environment: ["${{ needs.set-environment.outputs.environment }}"]
-    environment: ${{ matrix.environment }}
+    environment: ${{ matrix.environment }}  
     steps:
     - name: checkout the code
       uses: actions/checkout@v4
@@ -140,12 +138,12 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
     - name: gh auth login
-    # envi를 설정하지 않았기 때문에 레포 레벨 시크릿 사용
-      run: echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh auth login --with-token
-   - name: create branch
+      run: |
+        echo ${{ secrets.PERSONAL_ACCESS_TOKEN }} | gh auth login --with-token 
+    - name: create branch
       run: |
         git checkout -b release/${{ github.run_id }}
         git push origin release/${{ github.run_id }}
     - name: create pr
       run: |
-        gh pr create --base master --head release/${{ github.run_id }} --title "release/${{ github.run_id }} -> master" --body "release pr"          
+        gh pr create --base master --head release/${{ github.run_id }} --title "release/${{ github.run_id }} -> master" --body "release pr"
